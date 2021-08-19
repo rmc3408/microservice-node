@@ -16,7 +16,7 @@ function PostCreate() {
   };
 
   return (
-    <div style={{ width: "100%", padding: '1rem' }}>
+    <div style={{ width: "100%", padding: "1rem" }}>
       <Form
         name="createPost"
         layout="inline"
@@ -30,10 +30,12 @@ function PostCreate() {
           name="title"
           labelCol={{ offset: 4 }}
           wrapperCol={{ offset: 1, span: 24 }}
-          style={{ marginTop: 'auto', marginBottom: 'auto' }}
+          style={{ marginTop: "auto", marginBottom: "auto" }}
         >
-          <Input style={{ width: '400px' }} />
-          <Button htmlType="submit" style={{ backgroundColor: '#b7eb8f' }}>
+          <Input style={{ width: "400px" }} />
+        </Form.Item>
+        <Form.Item style={{ marginTop: "auto", marginBottom: "auto" }}>
+          <Button htmlType="submit" style={{ backgroundColor: "#b7eb8f" }}>
             Submit
           </Button>
         </Form.Item>
