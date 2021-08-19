@@ -12,15 +12,15 @@ function CommentsList({ commentsList }) {
 
   // useEffect(() => {
   //   getList(); // eslint-disable-next-line
-  // }, []); 
+  // }, []);
 
   return (
     <div className="commentsList-container">
-      {commentsList.map(({ id, content }) => (
-        <ul key={id} className="commentsList-post">
-          <li>{content}</li>
-        </ul>
-      ))}
+      <ul className="commentsList-post">
+        {commentsList.map(({ id, content }) => (
+          <li key={id}>{content}</li>
+        ))}
+      </ul>
     </div>
   );
 }
