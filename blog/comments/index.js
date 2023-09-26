@@ -22,7 +22,7 @@ app.post('/posts/:id/comments', async (req, res) => {
   const id = randomBytes(4).toString('hex')
   const { content } = req.body
 
-  const newComment = { id, content }
+  const newComment = { id, content, status: 'PENDING' }
 
   //get existing or new array of comments.
   if (commentsByPost[postId]) {
@@ -34,15 +34,31 @@ app.post('/posts/:id/comments', async (req, res) => {
 
   await axios.post(BASE_URL + PORT_BUS + '/events', {
     type: 'CommentsCreated',
-    data: { id, content, postId },
+    data: { postId, ...newComment },
   })
 
   res.status(201).send(newComment)
 })
 
 app.post('/events', async (req, res) => {
-  const event = req.body
-  console.log('COMMENTS event is', event.type)
+  const { type, data } = req.body
+
+  //console.log('COMMENTS event is', type)
+
+  if (type === 'CommentsModeratorCreated') {
+    const { id, postId, content, status } = data
+
+    commentsByPost[postId].find((comment) => {
+      if (comment.id === id) {
+        comment.status = status
+      }
+    })
+
+    await axios.post(BASE_URL + PORT_BUS + '/events', {
+      type: 'CommentsUpdated',
+      data: { id, content, postId, status },
+    })
+  }
   res.send({})
 })
 

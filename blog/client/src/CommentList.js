@@ -1,6 +1,11 @@
 const CommentList = ({ comments }) => {
   const renderedComments = comments.map((comment) => {
-    return <li key={comment.id}>{comment.content}</li>
+    const styledStatus = comment.status === 'APPROVED' ? { color: 'green' } : { color: 'red' }
+    return (
+      <li key={comment.id}>
+        <span style={styledStatus}>{comment.content}</span>
+      </li>
+    )
   })
 
   return <ul>{renderedComments}</ul>

@@ -13,7 +13,7 @@ Course Instructor: Stephen Grinder
 | Section | Topics | Completed |
 | ---: | --- | :---: |
 | Section 01 | Fundamental Ideas Around Microservices | &check; |
-| Section 02 | Mini-microservice App |  | <br>
+| Section 02 | Mini-microservice App | &check; | <br>
 | Section 03 | Runnning services with Docker |  | <br>
 | Section 04 | Orchestrating collections of services with Kubernetes |  | <br>
 | Section 05 | Architecture of multi-service Apps |  | <br>

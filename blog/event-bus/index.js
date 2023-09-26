@@ -1,7 +1,7 @@
 const express = require('express')
 const BodyParser = require('body-parser')
 const axios = require('axios')
-const { PORT_BUS, BASE_URL, PORT_COMMENTS, PORT_POSTS, PORT_QUERY } = require('../constant')
+const { PORT_BUS, BASE_URL, PORT_COMMENTS, PORT_POSTS, PORT_QUERY, PORT_MODERATOR } = require('../constant')
 
 const app = express()
 app.use(BodyParser.json())
@@ -19,10 +19,10 @@ app.post('/events', async (req, res) => {
   promises.push(axios.post(BASE_URL + PORT_POSTS + '/events', event))
   promises.push(axios.post(BASE_URL + PORT_COMMENTS + '/events', event))
   promises.push(axios.post(BASE_URL + PORT_QUERY + '/events', event))
+  promises.push(axios.post(BASE_URL + PORT_MODERATOR + '/events', event))
 
-  Promise.all(promises)
-    .then((values) => console.log(values.data))
-    .catch((e) => console.log(e.message))
+  Promise.allSettled(promises)
+  //.then((values) => values.forEach((value) => console.log(value.status)))
 
   res.send({ status: 'OK' })
 })
