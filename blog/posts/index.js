@@ -2,7 +2,7 @@ const express = require('express')
 const axios = require('axios')
 const cors = require('cors')
 const BodyParser = require('body-parser')
-const { PORT_POSTS, BASE_URL, PORT_BUS } = require('../constant')
+const { PORT_POSTS, BASE_URL, PORT_BUS } = require('./constant')
 
 const app = express()
 app.use(BodyParser.json())

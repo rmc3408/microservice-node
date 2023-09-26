@@ -2,7 +2,7 @@ const express = require('express')
 const BodyParser = require('body-parser')
 const axios = require('axios')
 const cors = require('cors')
-const { PORT_QUERY, BASE_URL, PORT_BUS } = require('../constant')
+const { PORT_QUERY, BASE_URL, PORT_BUS } = require('./constant')
 
 const posts = {}
 

@@ -1,7 +1,7 @@
 const express = require('express')
 const BodyParser = require('body-parser')
 const axios = require('axios')
-const { BASE_URL, PORT_BUS, PORT_MODERATOR } = require('../constant')
+const { BASE_URL, PORT_BUS, PORT_MODERATOR } = require('./constant')
 
 const app = express()
 app.use(BodyParser.json())
