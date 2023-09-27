@@ -1,13 +1,19 @@
-import express from 'express'
+import express, { Express } from 'express'
 import bodyParser from 'body-parser'
 
-const PORT_AUTH = 4000
+import { currentUserRouter } from './routes/current'
+import { signinRouter } from './routes/signin'
+import { signoutRouter } from './routes/signout'
+import { signupRouter } from './routes/signup'
 
-const app = express()
+const PORT_AUTH: number = 4000
+
+const app: Express = express()
 app.use(bodyParser.json())
 
-app.get('/api/users/current', (req, res) => {
-  res.send({ id: 1, name: 'Raph' })
-})
+app.use(currentUserRouter)
+app.use(signinRouter)
+app.use(signoutRouter)
+app.use(signupRouter)
 
 app.listen(PORT_AUTH, () => console.log('Listening AUTH on port', PORT_AUTH))
