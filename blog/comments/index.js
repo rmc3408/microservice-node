@@ -3,7 +3,7 @@ const BodyParser = require('body-parser')
 const { randomBytes } = require('crypto')
 const axios = require('axios')
 
-const { BASE_URL, PORT_BUS, PORT_COMMENTS } = require('./constant')
+const { K8S_BUS_URL, PORT_BUS, PORT_COMMENTS } = require('./constant')
 const cors = require('cors')
 
 const app = express()
@@ -32,7 +32,7 @@ app.post('/posts/:id/comments', async (req, res) => {
     commentsByPost[postId].push(newComment)
   }
 
-  await axios.post(BASE_URL + PORT_BUS + '/events', {
+  await axios.post(K8S_BUS_URL + PORT_BUS + '/events', {
     type: 'CommentsCreated',
     data: { postId, ...newComment },
   })
@@ -43,7 +43,7 @@ app.post('/posts/:id/comments', async (req, res) => {
 app.post('/events', async (req, res) => {
   const { type, data } = req.body
 
-  //console.log('COMMENTS event is', type)
+  console.log('COMMENTS event is', type)
 
   if (type === 'CommentsModeratorCreated') {
     const { id, postId, content, status } = data
@@ -54,7 +54,7 @@ app.post('/events', async (req, res) => {
       }
     })
 
-    await axios.post(BASE_URL + PORT_BUS + '/events', {
+    await axios.post(K8S_BUS_URL + PORT_BUS + '/events', {
       type: 'CommentsUpdated',
       data: { id, content, postId, status },
     })

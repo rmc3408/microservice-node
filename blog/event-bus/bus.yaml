@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bus-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bus
+  template:
+    metadata:
+      labels:
+        app: bus
+    spec:
+      containers:
+        - name: bus
+          image: bus-microservice:0.0.1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bus-srv
+spec:
+  type: NodePort
+  selector:
+    app: bus
+  ports:
+    - name: bus
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

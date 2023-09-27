@@ -1,7 +1,7 @@
 const express = require('express')
 const BodyParser = require('body-parser')
 const axios = require('axios')
-const { BASE_URL, PORT_BUS, PORT_MODERATOR } = require('./constant')
+const { K8S_BUS_URL, PORT_BUS, PORT_MODERATOR } = require('./constant')
 
 const app = express()
 app.use(BodyParser.json())
@@ -19,7 +19,7 @@ app.post('/events', async (req, res) => {
         status: analyzedStatus,
       },
     }
-    await axios.post(BASE_URL + PORT_BUS + '/events', moderatorCreatedEvent)
+    await axios.post(K8S_BUS_URL + PORT_BUS + '/events', moderatorCreatedEvent)
   }
   res.send({ status: 'OK' })
 })

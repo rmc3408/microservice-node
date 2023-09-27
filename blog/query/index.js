@@ -2,7 +2,7 @@ const express = require('express')
 const BodyParser = require('body-parser')
 const axios = require('axios')
 const cors = require('cors')
-const { PORT_QUERY, BASE_URL, PORT_BUS } = require('./constant')
+const { PORT_QUERY, K8S_BUS_URL, PORT_BUS } = require('./constant')
 
 const posts = {}
 
@@ -25,13 +25,12 @@ app.post('/events', (req, res) => {
 app.listen(PORT_QUERY, async () => {
   console.log(`Listening QUERY at ${PORT_QUERY}`)
 
-  const allEvents = await axios.get(BASE_URL + PORT_BUS + '/events')
+  const allEvents = await axios.get(K8S_BUS_URL + PORT_BUS + '/events')
 
   for (let { type, data } of allEvents.data) {
     console.log('processing all QUERY events: ', type)
     handleEvents(type, data)
   }
-  console.log(posts['59212a30'].comments)
 })
 
 function handleEvents(type, data) {
