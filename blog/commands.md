@@ -17,6 +17,8 @@ kubectl get pods
 kubectl get nodes
 kubectl get services
 kubectl get deployment
+kubectl get endpoints
+kubectl get ns 
 
 kubectl logs <pod-name>
 
@@ -35,3 +37,4 @@ kubectl delete deploy query-deploy
 # Installing Ingress - routing and load balance
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
 kubectl get pods --namespace=ingress-nginx
+kubectl delete all  --all -n ingress-nginx
