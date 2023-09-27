@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { BASE_URL, PORT_COMMENTS } from './constant'
+import { BASE_URL, PORT_COMMENTS, K8S_INGRESS } from './constant'
 
 const CommentCreate = ({ postId }) => {
   const [content, setContent] = useState('')
@@ -8,7 +8,8 @@ const CommentCreate = ({ postId }) => {
   const onSubmit = async (event) => {
     event.preventDefault()
 
-    await axios.post(BASE_URL + PORT_COMMENTS + '/posts/' + postId + '/comments', {
+    await axios.post(K8S_INGRESS + '/posts/' + postId + '/comments', {
+      //await axios.post(BASE_URL + PORT_COMMENTS + '/posts/' + postId + '/comments', {
       content,
     })
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import CommentCreate from './CommentCreate'
 import CommentList from './CommentList'
-import { BASE_URL, PORT_QUERY } from './constant'
+import { BASE_URL, K8S_INGRESS, PORT_QUERY } from './constant'
 
 const PostList = () => {
   const [posts, setPosts] = useState({})
@@ -10,7 +10,10 @@ const PostList = () => {
   const fetchPosts = async () => {
     // Monolithic
     //const res = await axios.get(BASE_URL + PORT_POSTS + '/posts')
-    const res = await axios.get(BASE_URL + PORT_QUERY + '/posts')
+    // Microservice local - Query
+    //const res = await axios.get(BASE_URL + PORT_QUERY + '/posts')
+    // Microservice Kubernetes
+    const res = await axios.get(K8S_INGRESS + '/posts')
     setPosts(res.data)
   }
 

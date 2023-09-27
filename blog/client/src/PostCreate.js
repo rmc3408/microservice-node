@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { BASE_URL, PORT_POSTS } from './constant'
+import { BASE_URL, PORT_POSTS, K8S_INGRESS } from './constant'
 
 const PostCreate = () => {
   const [title, setTitle] = useState('')
@@ -8,7 +8,7 @@ const PostCreate = () => {
   const onSubmit = async (event) => {
     event.preventDefault()
 
-    await axios.post(BASE_URL + PORT_POSTS + '/posts', {
+    await axios.post(K8S_INGRESS + '/posts/create', {
       title,
     })
 
