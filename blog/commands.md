@@ -18,6 +18,20 @@ kubectl get nodes
 kubectl get services
 kubectl get deployment
 
+kubectl logs <pod-name>
+
+# Stop via file
+kubectl stop -f client.yaml
+
+# Stop services
+kubectl get service --all-namespaces
+kubectl delete service --namespace=default bus-srv
+kubectl delete --all services
+
+# Stop deployment
+kubectl get deploy
+kubectl delete deploy query-deploy
+
 # Installing Ingress - routing and load balance
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
 kubectl get pods --namespace=ingress-nginx
