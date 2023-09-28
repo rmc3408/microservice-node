@@ -1,4 +1,5 @@
 import express, { Express } from 'express'
+require('express-async-errors')
 import bodyParser from 'body-parser'
 
 import { currentUserRouter } from './routes/current'
@@ -7,6 +8,7 @@ import { signoutRouter } from './routes/signout'
 import { signupRouter } from './routes/signup'
 import { errorHandler } from './middleware/errHandler'
 import NotFoundError from './error/notFound'
+import startDatabase from './config/mongo'
 
 const PORT_AUTH: number = 4000
 
@@ -23,4 +25,5 @@ app.all('*', () => {
 
 app.use(errorHandler)
 
+startDatabase()
 app.listen(PORT_AUTH, () => console.log('Listening AUTH on port', PORT_AUTH))
