@@ -43,3 +43,8 @@ kubectl delete namespace ingress-nginx
 # Skaffold
 skaffold dev
 skaffold delete
+
+# creating secret
+kubectl create secret generic jwt-secret --from-literal=JWT_KET=SECRET
+kubectl get secret
+kubectl delete secret jwt-secret
