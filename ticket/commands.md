@@ -38,6 +38,8 @@ kubectl delete deploy query-deploy
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
 kubectl get pods --namespace=ingress-nginx
 kubectl delete all  --all -n ingress-nginx
+kubectl delete namespace ingress-nginx
 
 # Skaffold
 skaffold dev
+skaffold delete

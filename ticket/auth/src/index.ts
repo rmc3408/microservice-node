@@ -15,6 +15,7 @@ const PORT_AUTH: number = 4000
 const app: Express = express()
 app.use(bodyParser.json())
 
+//Router
 app.use(currentUserRouter)
 app.use(signinRouter)
 app.use(signoutRouter)
@@ -22,8 +23,8 @@ app.use(signupRouter)
 app.all('*', () => {
   throw new NotFoundError()
 })
-
 app.use(errorHandler)
 
+// Start Servers
 startDatabase()
 app.listen(PORT_AUTH, () => console.log('Listening AUTH on port', PORT_AUTH))
