@@ -7,7 +7,7 @@ import { currentUserRouter } from './routes/current'
 import { signinRouter } from './routes/signin'
 import { signoutRouter } from './routes/signout'
 import { signupRouter } from './routes/signup'
-import { errorHandler } from './middleware/errHandler'
+import errorHandler from './middleware/errHandler'
 import NotFoundError from './error/notFound'
 import startDatabase from './config/mongo'
 import BadRequestError from './error/badRequest'
@@ -30,7 +30,7 @@ app.all('*', () => {
 app.use(errorHandler)
 
 // Enviroment Check from Kubernetes
-if (!process.env.JWT_key) throw new BadRequestError('JWT_key must be defined')
+if (!process.env.JWT_KEY) throw new BadRequestError('JWT_key must be defined')
 
 // Start Servers
 startDatabase()

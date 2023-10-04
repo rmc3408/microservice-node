@@ -1,23 +1,12 @@
 import express, { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import { body, validationResult } from 'express-validator'
-import RequestValidatorError from '../error/validator'
 import BadRequestError from '../error/badRequest'
 import User from '../models/user'
+import userValidatorHandler, { userValidator } from '../middleware/userHandler'
 
 const router = express.Router()
 
-const bodyValidator = [
-  body('email').isEmail().withMessage('Email must be valid'),
-  body('password').trim().isLength({ min: 4, max: 20 }).withMessage('Password must be between 4 and 20 characters'),
-]
-
-router.post('/api/users/signup', bodyValidator, async (req: Request, res: Response) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    throw new RequestValidatorError(errors.array())
-  }
-
+router.post('/api/users/signup', userValidator, userValidatorHandler, async (req: Request, res: Response) => {
   const { email, password } = req.body
 
   const existingUser = await User.findOne({ email })
@@ -29,7 +18,9 @@ router.post('/api/users/signup', bodyValidator, async (req: Request, res: Respon
   await newUser.save()
 
   const jwtUser = jwt.sign({ id: newUser._id, email: newUser.email }, process.env.JWT_KEY!)
-  req.session = { jwt: jwtUser }
+  req.session = {}
+  req.session.jwt = jwtUser
+
   res.status(201).send(newUser)
 })
 
