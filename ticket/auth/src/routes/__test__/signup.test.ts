@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../config/server';
+import app from '../../config/server';
 
 it('Should returns a 201 on successful SIGN UP', async () => {
   return request(app)
@@ -54,4 +54,17 @@ it('Should NOT allow SIGN UP due to same email', async () => {
       password: 'secret123'
     })
     .expect(400);
+});
+
+it('Should set cookie-header after SIGN UP succesful', async () => {
+  const response = await request(app)
+    .post('/api/users/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'secret123'
+    })
+    .expect(201);
+  
+  expect(response.get('Set-Cookie')).toBeDefined()
+
 });
