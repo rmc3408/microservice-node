@@ -19,7 +19,7 @@ router.post('/api/users/signin', userValidator, userValidatorHandler, async (req
   const isPasswordMatch = await Password.verify(existingUser.password, password)
   if (!isPasswordMatch) throw new BadRequestError('Invalid Password')
 
-  const jwtUser = jwt.sign({ id: existingUser._id, email: existingUser.email }, process.env.JWT_KEY!)
+  const jwtUser = jwt.sign({ id: existingUser._id, email: existingUser.email }, process.env.JWTKEY!)
   req.session = { jwt: jwtUser }
 
   res.send(existingUser)

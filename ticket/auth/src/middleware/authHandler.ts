@@ -21,7 +21,7 @@ export default function authHandler(req: Request, res: Response, next: NextFunct
     return next()
   }
 
-  jwt.verify(req.session?.jwt, process.env.JWT_KEY!, function (err: any, decoded: any) {
+  jwt.verify(req.session?.jwt, process.env.JWTKEY!, function (err: any, decoded: any) {
     if (err) {
       throw new NotAuthorizedError(err.message)
     }

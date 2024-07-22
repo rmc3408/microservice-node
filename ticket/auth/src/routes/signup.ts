@@ -17,7 +17,7 @@ router.post('/api/users/signup', userValidator, userValidatorHandler, async (req
   const newUser = new User({ email, password })
   await newUser.save()
 
-  const jwtUser = jwt.sign({ id: newUser._id, email: newUser.email }, process.env.JWT_KEY!)
+  const jwtUser = jwt.sign({ id: newUser._id, email: newUser.email }, process.env.JWTKEY!)
   req.session = {}
   req.session.jwt = jwtUser
 
