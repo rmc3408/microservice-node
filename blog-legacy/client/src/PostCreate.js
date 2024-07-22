@@ -10,7 +10,7 @@ function PostCreate() {
 
   const onFinish = async (values) => {
     console.log("Success:", values);
-    const result = await axios.post(URL_POSTS + "/posts", values);
+    const result = await axios.post(URL_POSTS, values);
     console.log("axios results = ", result.data);
     form.setFieldsValue({ title: "" });
   };

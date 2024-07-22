@@ -23,7 +23,7 @@ app.post('/posts', async (req, res) => {
         id,
         title,
     };
-    await axios.post('http://localhost:4005/events', {
+    await axios.post('http://bus-service-cluster:4005/events', {
         type: 'PostCreated',
         data: { id, title }
     });
@@ -39,5 +39,5 @@ app.post('/events', (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(`Listening POSTS at ${port}`)
+    console.log(`Listening POSTS version 0.0.3 at ${port}`)
 });

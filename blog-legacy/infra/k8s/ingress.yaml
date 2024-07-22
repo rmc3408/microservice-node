@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    kubernetes.io/ingress.rule-mix: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: rmc3408.dev
+      http:
+        paths:
+          - path: /posts
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: posts-service
+                port:
+                  number: 4000
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: client-service
+                port:
+                  number: 3000

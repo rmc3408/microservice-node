@@ -12,10 +12,10 @@ app.post('/events', async (req, res) => {
 
     events.push(event);
 
-    await axios.post('http://localhost:4000/events', event);
-    await axios.post('http://localhost:4001/events', event);
-    await axios.post('http://localhost:4002/events', event);
-    await axios.post('http://localhost:4003/events', event);
+    await axios.post('http://posts-service-cluster:4000/events', event);
+    // await axios.post('http://localhost:4001/events', event);
+    // await axios.post('http://localhost:4002/events', event);
+    // await axios.post('http://localhost:4003/events', event);
 
     res.send({ status: 'OKie' });
 });
@@ -25,5 +25,5 @@ app.get('/events', (req, res) => {
 });
 
 app.listen(4005, () => {
-    console.log(`Listening EVENTS at 4005`)
+    console.log(`Listening EVENTS version 0.0.2 at 4005`)
 });

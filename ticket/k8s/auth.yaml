@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: rmc3408/auth
+          image: rmc3408/microservice-ticket-auth
           env:
             - name: JWT_KEY
               valueFrom:
@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: auth-srv
 spec:
+  type: LoadBalancer
   selector:
     app: auth
   ports:
@@ -34,6 +35,7 @@ spec:
       protocol: TCP
       port: 4000
       targetPort: 4000
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -58,6 +60,7 @@ kind: Service
 metadata:
   name: auth-mongo-srv
 spec:
+  type: ClusterIP
   selector:
     app: auth-mongo
   ports:

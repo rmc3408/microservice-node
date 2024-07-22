@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-posts
+spec:
+  containers:
+    - name: microservice-node-blog-legacy-posts
+      image: rmc3408/microservice-node-blog-legacy-posts
+      imagePullPolicy: Never
+
+# Same image , use 
+`kubectl rollout restart deployment {deploy_name}`

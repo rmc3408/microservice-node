@@ -8,7 +8,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: rmc3408/auth
+    - image: rmc3408/microservice-ticket-auth
       context: auth
       docker:
         dockerfile: Dockerfile

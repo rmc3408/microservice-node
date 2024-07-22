@@ -1,8 +1,7 @@
 import mongoose from 'mongoose'
 import app from './server'
+import { PORT_AUTH, MONGO_URI } from '../constants/env'
 
-const PORT_AUTH: number = 4000
-const MONGO_URI: string = 'mongodb://auth-mongo-srv:27017/auth'
 
 async function startDatabase() {
   try {

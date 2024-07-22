@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-client
+  template:
+    metadata:
+      labels:
+        app: pod-client
+    spec:
+      containers:
+        - name: microservice-node-blog-legacy-client
+          image: rmc3408/microservice-node-blog-legacy-client
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+spec:
+  type: NodePort
+  selector:
+    app: pod-client
+  ports:
+    - name: client-srv-port
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

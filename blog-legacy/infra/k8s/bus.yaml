@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bus-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-bus
+  template:
+    metadata:
+      labels:
+        app: pod-bus
+    spec:
+      containers:
+        - name: microservice-node-blog-legacy-bus
+          image: rmc3408/microservice-node-blog-legacy-bus:0.0.2
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bus-service-cluster
+spec:
+  type: ClusterIP
+  selector:
+    app: pod-bus
+  ports:
+    - name: bus-srv-port
+      protocol: TCP
+      port: 4005
+      targetPort: 4005
