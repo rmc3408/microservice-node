@@ -40,6 +40,7 @@ build/Release
 # Dependency directories
 blog/**/node_modules/
 blog-legacy/**/node_modules/
+ticket/**/node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files

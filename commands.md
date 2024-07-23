@@ -30,6 +30,10 @@ kubectl get service --all-namespaces
 kubectl delete service --namespace=default bus-srv
 kubectl delete --all services
 
+# Expose service to external (one option bellow)
+minikube tunnel
+kubectl port-forward service/auth-srv 443:4000
+
 # Stop deployment
 kubectl get deploy
 kubectl delete deploy query-deploy
