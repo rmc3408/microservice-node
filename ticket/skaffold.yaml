@@ -24,3 +24,11 @@ build:
         manual:
           - src: 'src/**/*.js'
             dest: .
+    - image: rmc3408/microservice-ticket-ticket
+      context: ticket
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
