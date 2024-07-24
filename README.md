@@ -21,10 +21,10 @@ Course Instructor: Stephen Grinder
 | Section 08 | Database Management | &check; | <br>
 | Section 09 | Authentication Strategies and Options | &check; | <br>
 | Section 10 | Testing Isolated Microservices | &check; | <br>
-| Section 11 | Integrating Server-side Rendered React App |  | <br>
+| Section 11 | Integrating Server-side Rendered React App | &check; | <br>
+| Section 12 | Code Sharing and Publish NPM | &check; | <br>
+| Section 13 | Create-Read-Update-Destroy Server Setup |  | <br>
 
-| Section 11 | Authentication Strategies and Options |  | <br>
-| Section 11 | Authentication Strategies and Options |  | <br>
 | Section 11 | Authentication Strategies and Options |  | <br>
 | Section 11 | Authentication Strategies and Options |  | <br>
 | Section 11 | Authentication Strategies and Options |  | <br>

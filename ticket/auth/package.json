@@ -10,17 +10,20 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["./src/test/setup.ts"]
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/cookie-session": "^2.0.45",
-    "@types/jsonwebtoken": "^9.0.3",
-    "@types/express": "^4.17.18",
-    "@types/mongoose": "^5.11.97",
+    "@rmc3408/microservice-node-common": "^0.0.11",
     "@types/bcrypt": "^5.0.0",
+    "@types/cookie-session": "^2.0.45",
+    "@types/express": "^4.17.18",
+    "@types/jsonwebtoken": "^9.0.3",
+    "@types/mongoose": "^5.11.97",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cookie-session": "^2.0.0",

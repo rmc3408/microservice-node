@@ -3,8 +3,7 @@ import { currentUserRouter } from './current'
 import { signinRouter } from './signin'
 import { signoutRouter } from './signout'
 import { signupRouter } from './signup'
-import errorHandler from '../middleware/errHandler'
-import NotFoundError from '../error/notFound'
+import { errorHandler, NotFoundError } from '@rmc3408/microservice-node-common'
 
 //Router
 export default function setupRouter(app: Express) {

@@ -1,8 +1,7 @@
 import express, { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import BadRequestError from '../error/badRequest'
 import User from '../models/user'
-import userValidatorHandler, { userValidator } from '../middleware/userHandler'
+import { BadRequestError, userValidatorHandler, userValidator } from '@rmc3408/microservice-node-common'
 
 const router = express.Router()
 

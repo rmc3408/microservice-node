@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express'
-import authHandler from '../middleware/authHandler'
-import currentUserHandler from '../middleware/currentUserHandler'
+import { authHandler, currentUserHandler } from '@rmc3408/microservice-node-common'
 
 const router = express.Router()
 
