@@ -13,10 +13,9 @@ function useRequest({ url, method, body, onSucess }) {
     } catch (error) {
       setErrors(
       <ul className='alert alert-danger mt-3 px-4'>
-        {error.response.data.errors?.map((er) => <li key={er.message}>{er.message}</li>)}
+        {error.response?.data?.errors?.map((er) => <li key={er.message}>{er.message}</li>)}
       </ul>)
     }
-    
   }
 
   return {
