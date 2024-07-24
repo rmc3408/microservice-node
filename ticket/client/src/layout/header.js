@@ -7,8 +7,8 @@ function Headers({ currentUser }) {
     !currentUser && { label: 'Sign In', href: '/auth/signin' },
     currentUser && { label: 'Sign Out', href: '/auth/signout' },
   ]
-    .filter((linkConfig) => linkConfig)
-    .map(({ label, href }) => {
+
+  const linkMapped = links.filter(validationCurrentUser => validationCurrentUser).map(({ label, href }) => {
       return (
         <li key={href} className="nav-item">
           <Link className="nav-link" href={href}>
@@ -25,7 +25,7 @@ function Headers({ currentUser }) {
       </Link>
 
       <div className="d-flex justify-content-end">
-        <ul className="nav d-flex align-items-center">{links}</ul>
+        <ul className="nav d-flex align-items-center">{linkMapped}</ul>
       </div>
     </nav>
   );

@@ -5,6 +5,7 @@ export default function AppComponent({ Component, pageProps, currentUser }) {
   return <Component {...pageProps} currentUser={currentUser} />
 }
 
+// Activate on each request - each Request time (server) and changing pages (client) 
 AppComponent.getInitialProps = async (appContext) => {
   const isNotBrowser = typeof window === 'undefined'
 
