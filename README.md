@@ -23,11 +23,15 @@ Course Instructor: Stephen Grinder
 | Section 10 | Testing Isolated Microservices | &check; | <br>
 | Section 11 | Integrating Server-side Rendered React App | &check; | <br>
 | Section 12 | Code Sharing and Publish NPM | &check; | <br>
-| Section 13 | Create-Read-Update-Destroy Server Setup |  | <br>
+| Section 13 | Create-Read-Update-Destroy Server Setup | &check; | <br>
 
-| Section 11 | Authentication Strategies and Options |  | <br>
-| Section 11 | Authentication Strategies and Options |  | <br>
-| Section 11 | Authentication Strategies and Options |  | <br>
-| Section 11 | Authentication Strategies and Options |  | <br>
-| Section 11 | Authentication Strategies and Options |  | <br>
-| Section 11 | Authentication Strategies and Options |  | <br>
+| Section 14 | NATS Streaming service - EventBus |  | <br>
+
+| Section 15 | Connecting NATS to NodeJS |  | <br>
+| Section 16 | Managing NATS Client |  | <br>
+| Section 17 | Cross-service Data Replication in action |  | <br>
+| Section 18 | Understanding Event Flow |  | <br>
+| Section 19 | Listening for Events and Handiling Concurrency Issue |  | <br>
+| Section 20 | Worker Services |  | <br>
+
+
