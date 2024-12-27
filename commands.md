@@ -52,3 +52,12 @@ skaffold delete
 kubectl create secret generic jwt-secret --from-literal=JWT_KET=SECRET
 kubectl get secret
 kubectl delete secret jwt-secret
+
+
+# Start from zero
+start minikube
+`minikube start`
+run all services
+`skaffold dev`
+In another terminal, run `minikube tunnel`
+Open page `http://rmc3408.dev`
