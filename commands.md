@@ -33,6 +33,7 @@ kubectl delete --all services
 # Expose service to external (one option bellow)
 minikube tunnel
 kubectl port-forward service/auth-srv 443:4000
+kubectl port-forward pods/nats-deploy-5b44df9ddf-wgs4m 4222:4222
 
 # Stop deployment
 kubectl get deploy
@@ -55,9 +56,7 @@ kubectl delete secret jwt-secret
 
 
 # Start from zero
-start minikube
-`minikube start`
-run all services
-`skaffold dev`
-In another terminal, run `minikube tunnel`
-Open page `http://rmc3408.dev`
+1. start minikube `minikube start`
+2. run all deploy, pods, services `skaffold dev`
+3. In another terminal, run `minikube tunnel` or port-forward
+4. Open page `http://rmc3408.dev`

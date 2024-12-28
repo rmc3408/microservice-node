@@ -41,6 +41,7 @@ build/Release
 blog/**/node_modules/
 blog-legacy/**/node_modules/
 ticket/**/node_modules/
+nats-prototype/**/node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
