@@ -24,10 +24,8 @@ Course Instructor: Stephen Grinder
 | Section 11 | Integrating Server-side Rendered React App | &check; | <br>
 | Section 12 | Code Sharing and Publish NPM | &check; | <br>
 | Section 13 | Create-Read-Update-Destroy Server Setup | &check; | <br>
-
-| Section 14 | NATS Streaming service - EventBus |  | <br>
-
-| Section 15 | Connecting NATS to NodeJS |  | <br>
+| Section 14 | NATS Streaming service - EventBus | &check; | <br>
+| Section 15 | Connecting NATS to NodeJS | &check; | <br>
 | Section 16 | Managing NATS Client |  | <br>
 | Section 17 | Cross-service Data Replication in action |  | <br>
 | Section 18 | Understanding Event Flow |  | <br>

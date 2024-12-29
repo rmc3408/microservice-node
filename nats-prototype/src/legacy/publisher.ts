@@ -20,12 +20,6 @@ stan.on('connect', () => {
   stan.publish('ticket:created', data, () => {
     console.log('Event published 1');
   });
-  stan.publish('ticket:created', data, () => {
-    console.log('Event published 2');
-  });
-  stan.publish('ticket:created', data, () => {
-    console.log('Event published 3');
-  });
 });
 
 stan.on('close', () => {
