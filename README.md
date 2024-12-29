@@ -26,7 +26,7 @@ Course Instructor: Stephen Grinder
 | Section 13 | Create-Read-Update-Destroy Server Setup | &check; | <br>
 | Section 14 | NATS Streaming service - EventBus | &check; | <br>
 | Section 15 | Connecting NATS to NodeJS | &check; | <br>
-| Section 16 | Managing NATS Client |  | <br>
+| Section 16 | Managing NATS Client | &check; | <br>
 | Section 17 | Cross-service Data Replication in action |  | <br>
 | Section 18 | Understanding Event Flow |  | <br>
 | Section 19 | Listening for Events and Handiling Concurrency Issue |  | <br>

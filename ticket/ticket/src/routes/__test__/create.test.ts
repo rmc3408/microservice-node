@@ -1,6 +1,7 @@
 import request from 'supertest';
 import app from '../../config/server';
 import Ticket from '../../models/ticket';
+import { stan } from '../../config/nats'
 
 
 const email: string = 'test@test.com';
@@ -88,3 +89,14 @@ it('Should save record in the database when creates a ticket', async () => {
   expect(foundTicketsList.length).toEqual(1)
   expect(foundTicketsList[0].title).toBe('Almond')
 });
+
+it('Should invoke NATS and publish event', async () => {
+  const cookie = global.getSignIn(email)
+
+  await request(app).post('/api/tickets/create')
+    .set('Cookie', cookie)
+    .send({ title, price, userId })
+    .expect(201)
+
+  expect(stan.client.publish).toHaveBeenCalled()
+})

@@ -2,6 +2,7 @@ import request from 'supertest';
 import app from '../../config/server';
 import mongoose from 'mongoose';
 
+
 const email: string = 'test@test.com';
 
 it('returns a 404 if the provided id does not exist', async () => {

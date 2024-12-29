@@ -1,6 +1,6 @@
 import nats, { Stan, SubscriptionOptions, Message } from 'node-nats-streaming';
 import { randomBytes } from 'crypto';
-import TicketCreatedPublisher from './events/Publisher/TicketCreated';
+import TicketCreatedPublisher from './events/TicketCreatedPublisher'
 
 const clusterId: string = 'ticket-nats'
 const clientId: string = `client-${randomBytes(2).toString('hex')}`

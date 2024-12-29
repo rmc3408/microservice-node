@@ -59,4 +59,9 @@ kubectl delete secret jwt-secret
 1. start minikube `minikube start`
 2. run all deploy, pods, services `skaffold dev`
 3. In another terminal, run `minikube tunnel` or port-forward
-4. Open page `http://rmc3408.dev`
+4. Open page `http://rmc3408.dev` - might need type "thisisunsafe" to avoid chrome privacy
+
+# To run NATS
+`kubectl get pods`
+Find the nats-deploy pods name
+`kubectl port-forward pod/nats-deploy-XXXXXX 4222:4222`

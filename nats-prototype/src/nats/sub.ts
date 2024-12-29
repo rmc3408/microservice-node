@@ -1,6 +1,6 @@
 import nats from 'node-nats-streaming';
 import { randomBytes } from 'crypto';
-import TicketCreatedListener from './events/Listener/TicketCreated'
+import TicketCreatedListener from './events/TicketCreatedListener'
 
 const clusterId: string = 'ticket-nats'
 const clientId: string = `client-${randomBytes(2).toString('hex')}`

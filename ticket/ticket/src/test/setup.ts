@@ -2,13 +2,18 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken';
 
+
 declare global {
   var getSignIn: (email: string) => string[];
 }
 
+jest.mock('../config/nats')
+
 let mongo: any
 
 beforeAll(async () => {
+  jest.clearAllMocks()
+  
   process.env.JWTKEY = 'Secret@123'
 
   const mongo = await MongoMemoryServer.create()
