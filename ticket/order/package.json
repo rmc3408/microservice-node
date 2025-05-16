@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rmc3408/microservice-node-common": "^0.0.15",
+    "@rmc3408/microservice-node-common": "^0.0.22",
     "@types/cookie-session": "^2.0.45",
     "@types/express": "^4.17.18",
     "@types/mongoose": "^5.11.97",

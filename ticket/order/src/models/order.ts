@@ -1,20 +1,21 @@
 import { Schema, model, Document, Model } from 'mongoose';
+import { OrderStatus } from '@rmc3408/microservice-node-common';
 
 // 1. Create an interface representing a document in MongoDB.
 
 // Incoming Properties required to create ticket
 interface IOrderProps {
-  userId: string;
-  status: string;
-  expiresAt: Date;
-  ticket: Ticket;
+  userId: string
+  status: OrderStatus
+  expiresAt: Date
+  ticket: TicketDoc
 }
 // Outcoming Properties Saved in the Database
 interface IOrderDocs extends Document {
-  userId: string;
-  status: string;
-  expiresAt: Date;
-  ticket: Ticket;
+  userId: string
+  status: OrderStatus
+  expiresAt: Date
+  ticket: TicketDoc
 }
 // Incoming Method to transform from creator to Docs
 interface IOrderMethods {
@@ -30,7 +31,7 @@ interface IOrderModel extends Model<IOrderProps, {}, IOrderMethods> {
 const orderSchema = new Schema<IOrderDocs, IOrderModel, IOrderMethods>(
   {
     userId: { type: String, required: true },
-    status: { type: String, required: true },
+    status: { type: String, required: true, enum: Object.values(OrderStatus), default: OrderStatus.CREATED },
     expiresAt: { type: Schema.Types.Date, required: true },
     ticket: { type: Schema.Types.ObjectId, ref: 'Ticket' },
   },
