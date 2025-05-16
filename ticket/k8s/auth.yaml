@@ -17,7 +17,7 @@ spec:
           image: rmc3408/microservice-ticket-auth
           env:
             - name: JWTKEY
-              value: Secret@123
+              value: Secret123
 ---
 apiVersion: v1
 kind: Service

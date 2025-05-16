@@ -50,8 +50,7 @@ skaffold dev
 skaffold delete
 
 # creating secret
-kubectl create secret generic jwt-secret --from-literal=JWT_KET=SECRET
-kubectl get secret
+kubectl create secret generic jwt-secret --from-literal=JWTKEY=Secret123
 kubectl delete secret jwt-secret
 
 
@@ -66,3 +65,10 @@ install docker, minikube and skaffold
 `kubectl get pods`
 Find the nats-deploy pods name
 `kubectl port-forward pod/nats-deploy-XXXXXX 4222:4222`
+
+# PORTS
+auth 4000
+ticket 4001
+orders 4002
+client 3000
+NATS 4222

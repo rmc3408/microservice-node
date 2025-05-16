@@ -10,7 +10,7 @@ declare global {
 let mongo: any
 
 beforeAll(async () => {
-  process.env.JWTKEY = 'Secret@123'
+  process.env.JWTKEY = 'Secret123'
 
   const mongo = await MongoMemoryServer.create()
   const mongoUri = mongo.getUri()

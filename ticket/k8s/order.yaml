@@ -1,21 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ticket-deploy
+  name: order-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ticket
+      app: order
   template:
     metadata:
       labels:
-        app: ticket
+        app: order
     spec:
       containers:
-        - name: ticket
-          image: rmc3408/microservice-ticket-ticket
+        - name: order
+          image: rmc3408/microservice-ticket-order
           env:
+            - name: MONGO_URI
+              value: mongodb://order-mongo-srv:27017/order
+            - name: PORT_ORDER
+              value: '4002'
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:
@@ -25,18 +29,21 @@ spec:
             - name: NATS_CLUSTER_ID
               value: ticket-nats
             - name: JWTKEY
-              value: Secret123
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWTKEY
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ticket-srv
+  name: order-srv
 spec:
   type: LoadBalancer
   selector:
-    app: ticket
+    app: order
   ports:
-    - name: ticket
+    - name: order
       protocol: TCP
-      port: 4001
-      targetPort: 4001
+      port: 4002
+      targetPort: 4002
