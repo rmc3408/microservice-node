@@ -56,6 +56,7 @@ kubectl delete secret jwt-secret
 
 
 # Start from zero
+install docker, minikube and skaffold
 1. start minikube `minikube start`
 2. run all deploy, pods, services `skaffold dev`
 3. In another terminal, run `minikube tunnel` or port-forward
