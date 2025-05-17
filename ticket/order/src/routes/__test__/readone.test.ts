@@ -1,62 +1,62 @@
 import request from 'supertest';
-import app from '../../config/server';
-import { Types } from 'mongoose';
-
+import app from '../../config/server'
+import Ticket from '../../models/ticket'
+import mongoose from 'mongoose';
 
 const email: string = 'test@test.com';
+const email2: string = 'user2@test.com'
 const title: string = 'Almond';
 const price: number = 23.99
-const userId: string = '123456789'
-const ObjId: Types.ObjectId = new Types.ObjectId()
+const userId: string = new mongoose.Types.ObjectId().toHexString()
 
-it('Should return a 404 if ticket is not found', async () => {
+it('fetches the order', async () => {
+  // Create a ticket
+  const ticket = Ticket.build({
+    title,
+    price,
+  });
+  await ticket.save();
+
   const cookie = global.getSignIn(email)
-
-  await request(app)
-    .post('/api/tickets/create')
+  // make a request to build an order with this ticket
+  const { body: order } = await request(app)
+    .post('/api/orders/create')
     .set('Cookie', cookie)
-    .send({ title, price, userId })
+    .send({ ticketId: ticket.id })
+    .expect(201);
 
-  const response1 = await request(app)
-    .get('/api/tickets/read/' + ObjId)
+  // make request to fetch the order
+  const { body: fetchedOrder } = await request(app)
+    .get(`/api/orders/read/${order.id}`)
+    .set('Cookie', cookie)
+    .send()
+    .expect(200);
 
-  expect(response1.statusCode).toEqual(404)
+  expect(fetchedOrder.id).toEqual(order.id);
 });
 
-it('Should return a 400 if ID params is invalid', async () => {
-  const cookie = global.getSignIn(email)
+it('returns an error if one user tries to fetch another users order', async () => {
+  // Create a ticket
+  const ticket = Ticket.build({
+    title,
+    price,
+  });
+  await ticket.save();
 
+  const cookie = global.getSignIn(email)
+  // make a request to build an order with this ticket
+  const { body: order } = await request(app)
+    .post('/api/orders/create')
+    .set('Cookie', cookie)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+  
+
+  const cookie2 = global.getSignIn(email2)
+  // make request to an order from different user -cookie2
   await request(app)
-    .post('/api/tickets/create')
-    .set('Cookie', cookie)
-    .send({ title, price, userId })
-
-  const response1 = await request(app)
-    .get('/api/tickets/read/' + 'RANDOM_ID_VALUE')
-
-  expect(response1.statusCode).toEqual(400)
-  expect(response1.body.errors[0].message).toBe('Object Id must be valid')
-});
-
-it('Should return a 200 and the ticket found', async () => {
-  const cookie = global.getSignIn(email)
-
-  const created = await request(app)
-    .post('/api/tickets/create')
-    .set('Cookie', cookie)
-    .send({ title, price, userId })
-
-  const ticketId = created.body.id
-
-  const response = await request(app)
-    .get('/api/tickets/read/' + ticketId)
-
-  expect(response.statusCode).toEqual(200)
-  expect(response.body).toEqual({ 
-    "createdAt": created.body.createdAt, 
-    "id": created.body.id, 
-    "price": price, 
-    "title": title, 
-    "userId": userId 
-  })
+    .get(`/api/orders/read/${order.id}`)
+    .set('Cookie', cookie2)
+    .send()
+    .expect(401);
 });

@@ -1,12 +1,12 @@
 import express, { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import User from '../models/user'
-import { BadRequestError, userValidatorHandler, userValidator } from '@rmc3408/microservice-node-common'
+import { BadRequestError, validatorHandler, userValidator } from '@rmc3408/microservice-node-common'
 import { Password } from '../services/hashing'
 
 const router = express.Router()
 
-router.post('/api/users/signin', userValidator, userValidatorHandler, async (req: Request, res: Response) => {
+router.post('/api/users/signin', userValidator, validatorHandler, async (req: Request, res: Response) => {
   const { email, password } = req.body
 
   const existingUser = await User.findOne({ email })

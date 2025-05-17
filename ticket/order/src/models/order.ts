@@ -1,5 +1,6 @@
 import { Schema, model, Document, Model } from 'mongoose';
 import { OrderStatus } from '@rmc3408/microservice-node-common';
+import { ITicketDocs } from './ticket';
 
 // 1. Create an interface representing a document in MongoDB.
 
@@ -8,14 +9,14 @@ interface IOrderProps {
   userId: string
   status: OrderStatus
   expiresAt: Date
-  ticket: TicketDoc
+  ticket: ITicketDocs['_id']
 }
 // Outcoming Properties Saved in the Database
 interface IOrderDocs extends Document {
   userId: string
   status: OrderStatus
   expiresAt: Date
-  ticket: TicketDoc
+  ticket: ITicketDocs['_id']
 }
 // Incoming Method to transform from creator to Docs
 interface IOrderMethods {

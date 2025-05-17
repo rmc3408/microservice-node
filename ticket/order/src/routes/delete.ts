@@ -3,8 +3,7 @@ import {
     currentUserHandler,
     NotAuthorizedError,
     NotFoundError,
-    ticketValidator,
-    ticketValidatorHandler,
+    OrderStatus,
 } from '@rmc3408/microservice-node-common'
 import express, { Request, Response } from 'express'
 // import { stan } from '../config/nats'
@@ -17,20 +16,19 @@ router.delete(
   '/api/orders/delete/:id',
   authHandler,
   currentUserHandler,
-  ticketValidator,
-  ticketValidatorHandler,
   async (req: Request, res: Response) => {
-    const ticket = await Order.findById(req.params.id)
+    const order = await Order.findById(req.params.id)
 
-    if (!ticket) {
+    if (!order) {
       throw new NotFoundError()
     }
 
-    if (ticket.userId !== req.currentUser!.id) {
+    if (order.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError()
     }
 
-    await ticket.deleteOne()
+    order.status = OrderStatus.CANCELLED
+    await order.save()
     // await new TicketUpdatedPublisher(stan.client).publish({
     //   id: ticket.id,
     //   title: ticket.title,
@@ -38,7 +36,7 @@ router.delete(
     //   userId: ticket.userId,
     // })
 
-    res.status(204).send(ticket)
+    res.status(204).send(order)
   }
 )
 

@@ -55,11 +55,12 @@ kubectl delete secret jwt-secret
 
 
 # Start from zero
-install docker, minikube and skaffold
+install 4 points: docker, minikube, ingress URL and skaffold
 1. start minikube `minikube start`
-2. run all deploy, pods, services `skaffold dev`
-3. In another terminal, run `minikube tunnel` or port-forward
-4. Open page `http://rmc3408.dev` - might need type "thisisunsafe" to avoid chrome privacy
+2. create secret in kubernetes - line above
+3. run all deploy, pods, services `skaffold dev`
+4. In another terminal, run `minikube tunnel` or port-forward
+5. Open page `http://rmc3408.dev` - might need type "thisisunsafe" to avoid chrome privacy
 
 # To run NATS
 `kubectl get pods`

@@ -27,9 +27,12 @@ Course Instructor: Stephen Grinder
 | Section 14 | NATS Streaming service - EventBus | &check; | <br>
 | Section 15 | Connecting NATS to NodeJS | &check; | <br>
 | Section 16 | Managing NATS Client | &check; | <br>
-| Section 17 | Cross-service Data Replication in action |  | <br>
+| Section 17 | Cross-service Data Replication in action | &check; | <br>
 | Section 18 | Understanding Event Flow |  | <br>
 | Section 19 | Listening for Events and Handiling Concurrency Issue |  | <br>
 | Section 20 | Worker Services |  | <br>
+| Section 21 | Handling Payments |  | <br>
+| Section 22 | Back to Client |  | <br>
+| Section 23 | CI/CD |  | <br>
 
 

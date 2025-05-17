@@ -1,102 +1,62 @@
 import request from 'supertest';
-import { stan } from '../../config/nats';
+// import { stan } from '../../config/nats';
 import app from '../../config/server';
-import Ticket from '../../models/order';
+import Order from '../../models/order';
+import Ticket from '../../models/ticket';
+import mongoose from 'mongoose';
+import { OrderStatus } from '@rmc3408/microservice-node-common';
 
 
 const email: string = 'test@test.com';
 const title: string = 'Almond';
 const price: number = 23.99
-const userId: string = '123456789'
+const userId: string = new mongoose.Types.ObjectId().toHexString()
 
-it('Should NOT return a 404 due to have a CREATE handler', async () => {
-  const response1 = await request(app)
-    .post('/api/tickets/create')
-    .send({})
+
+it('Should return a 404 if ticket does not exist', async () => {
+  const cookie = global.getSignIn(email)
+  const ticketId = new mongoose.Types.ObjectId()
   
-  expect(response1.statusCode).not.toEqual(404)
+  const response1 = await request(app).post('/api/orders/create').set('Cookie', cookie).send({ ticketId })
+
+  expect(response1.statusCode).toEqual(404)
 });
 
-it('Should return 401 Unauthorized response due to missing cookie from signedIn', async () => {
-  await request(app)
-    .post('/api/tickets/create')
-    .send({})
-    .expect(401)
-});
-
-it('Should return non-401 Unauthorized response because user signedIn', async () => {
+it('Should return error is Ticket is reserved', async () => {
   const cookie = global.getSignIn(email)
 
-  const response2 = await request(app)
-    .post('/api/tickets/create')
-    .set('Cookie', cookie)
-    .send({ title, price })
+  const ticket = Ticket.build({
+    title,
+    price,
+  });
+  await ticket.save();
 
-  expect(response2.statusCode).not.toEqual(401)
-});
-
-it('Should return a error if an invalid TITLE', async () => {
-  const cookie = global.getSignIn(email)
+  const order = Order.build({
+    userId,
+    status: OrderStatus.CREATED,
+    expiresAt: new Date(),
+    ticket: ticket.id,
+  })
+  await order.save();
 
   await request(app)
-    .post('/api/tickets/create')
+    .post('/api/orders/create')
     .set('Cookie', cookie)
-    .send({ title: '', price })
+    .send({ ticketId: ticket.id })
     .expect(400)
 });
 
-it('Should return a error if an invalid PRICE', async () => {
+
+it('Should returns 201 when creates a order with ticket', async () => {
   const cookie = global.getSignIn(email)
 
-  await request(app)
-    .post('/api/tickets/create')
-    .set('Cookie', cookie)
-    .send({ title, price: -1 })
-    .expect(400)
-  
-  await request(app)
-    .post('/api/tickets/create')
-    .set('Cookie', cookie)
-    .send({ title })
-    .expect(400)
+  const ticket = Ticket.build({
+    title,
+    price,
+  })
+  await ticket.save()
+
+  await request(app).post('/api/orders/create').set('Cookie', cookie).send({ ticketId: ticket.id }).expect(201)
 });
 
-it('Should returns 201 when creates a ticket', async () => {
-  const cookie = global.getSignIn(email)
-
-  await request(app)
-    .post('/api/tickets/create')
-    .set('Cookie', cookie)
-    .send({ title, price, userId })
-    .expect(201)
-});
-
-it('Should save record in the database when creates a ticket', async () => {
-  const cookie = global.getSignIn(email)
-
-  let foundTickets = await Ticket.find({})
-  //console.log('Before Creating Ticket', foundTickets)
-  expect(foundTickets.length).toEqual(0)
-
-  await request(app)
-    .post('/api/tickets/create')
-    .set('Cookie', cookie)
-    .send({ title, price, userId })
-    .expect(201)
-
-  let foundTicketsList = await Ticket.find({})
-  //console.log('After created tickets - list', foundTicketsList)
-  expect(foundTicketsList.length).toEqual(1)
-  expect(foundTicketsList[0].title).toBe('Almond')
-});
-
-it('Should invoke NATS and publish event', async () => {
-  const cookie = global.getSignIn(email)
-
-  await request(app).post('/api/tickets/create')
-    .set('Cookie', cookie)
-    .send({ title, price, userId })
-    .expect(201)
-
-  expect(stan.client.publish).toHaveBeenCalled()
-})
+it.todo('Should emit order created event');

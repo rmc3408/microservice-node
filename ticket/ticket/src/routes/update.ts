@@ -3,7 +3,6 @@ import {
   NotFoundError,
   NotAuthorizedError,
   ticketValidator,
-  ticketValidatorHandler,
   authHandler,
   currentUserHandler,
 } from '@rmc3408/microservice-node-common'
@@ -18,7 +17,6 @@ router.put(
   authHandler,
   currentUserHandler,
   ticketValidator,
-  ticketValidatorHandler,
   async (req: Request, res: Response) => {
     const ticket = await Ticket.findById(req.params.id)
 

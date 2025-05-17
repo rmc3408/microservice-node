@@ -36,7 +36,7 @@ const ticketSchema = new Schema<ITicketDocs, ITicketModel, ITicketMethods>(
   },
   {
     toJSON: {
-      transform(_doc, ret) {
+      transform(_doc: any, ret: any) {
         ret.id = ret._id
         delete ret._id
         delete ret.__v
